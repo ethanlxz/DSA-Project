@@ -28,7 +28,7 @@ class Student;
 class Teacher;
 
 extern int studID;
-extern int teachID;
+extern int teacherID;
 extern int totalStudents;
 extern int totalTeachers;
 
@@ -111,12 +111,13 @@ struct sList
 void addStudent(sList *&head);
 void addStudentToEnd(sList *&head, sList *newNode);
 void deleteStudent(sList *&head);
+void displayStudents(sList *head);
 
 // Linked list for teacher
 struct tList
 {
 	Teacher *teacher;
-	sList *next;
+	tList *next;
 
 	// Constructor for sList that initializes a Teacher object
 	tList(int _id, std::string f, std::string l, char g, std::string c, std::string e, std::string b)
@@ -130,3 +131,7 @@ struct tList
 		delete teacher;
 	}
 };
+
+void addTeacher(tList *&head);
+void addTeacherToEnd(tList *&head, tList *newNode);
+void deleteTeacher(tList *&head);

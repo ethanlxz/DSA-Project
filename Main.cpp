@@ -1,7 +1,7 @@
 #include "Header.hpp"	
 
 int studID = 0;
-int teachID = 0;
+int teacherID = 0;
 int totalStudents = 0;
 int totalTeachers = 0;
 
@@ -34,13 +34,58 @@ void studentMenu(sList *&student)
 			deleteStudent(student);
 			break;
 		case 3:
-			cout << "Displaying all students" << endl;
+			displayStudents(student);
 			break;
 		case 4:
 			cout << "Searching for student" << endl;
 			break;
 		case 5:
 			cout << "Exiting student menu." << endl;
+			exit = 0;
+			break;
+		default:
+			cout << "Invalid choice. Please try again." << endl;
+			break;
+		}
+	}
+}
+
+void teacherMenu(tList *&teacher)
+{
+	int exit = 1;
+	while (exit)
+	{
+
+		int choice;
+
+		cout << YELLOW;
+		cout << "\n========== Teacher Menu ==========" << endl;
+		cout << GREEN;
+		cout << "1. Add Teacher" << endl;
+		cout << "2. Remove Teacher" << endl;
+		cout << "3. Display Teacher" << endl;
+		cout << "4. Search Teacher" << endl;
+		cout << "5. Exit" << endl;
+		cout << YELLOW;
+		cout << "Enter the number you want to go" << endl;
+		cout << RESET;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			addTeacher(teacher);
+			break;
+		case 2:
+			deleteTeacher(teacher);
+			break;
+		case 3:
+			cout << "Displaying all teachers" << endl;
+			break;
+		case 4:
+			cout << "Searching for teacher" << endl;
+			break;
+		case 5:
+			cout << "Exiting teacher menu." << endl;
 			exit = 0;
 			break;
 		default:
@@ -76,7 +121,7 @@ void menu(sList *&student, tList *&teacher)
 			studentMenu(student);
 			break;
 		case 2:
-			cout << "Teacher Menu" << endl;
+			teacherMenu(teacher);
 			break;
 		case 3:
 			cout << "Admin Menu" << endl;
