@@ -101,6 +101,7 @@ void deleteStudent(sList *&head) {
     }
     std::cout << "Student not found!\n";
 }
+
 // Function to display all students in the list
 void displayStudents(sList *&head) {
     if (!head) {
@@ -133,14 +134,14 @@ void displayStudents(sList *&head) {
     }
 }
 
-// 合并两个已排序的链表
+// Merge the Sort
 sList* mergeSorted(sList* left, sList* right, int option) {
     if (!left) return right;
     if (!right) return left;
 
     sList* result = nullptr;
 
-    if (option == 1) { // 按 ID 升序
+    if (option == 1) { // Sort the Id accendingly
         if (left->student->getID() <= right->student->getID()) {
             result = left;
             result->next = mergeSorted(left->next, right, option);
@@ -148,7 +149,7 @@ sList* mergeSorted(sList* left, sList* right, int option) {
             result = right;
             result->next = mergeSorted(left, right->next, option);
         }
-    } else if (option == 2) { // 按 ID 降序
+    } else if (option == 2) { // Sort the ID descendingly
         if (left->student->getID() >= right->student->getID()) {
             result = left;
             result->next = mergeSorted(left->next, right, option);
@@ -156,7 +157,7 @@ sList* mergeSorted(sList* left, sList* right, int option) {
             result = right;
             result->next = mergeSorted(left, right->next, option);
         }
-    } else if (option == 3) { // 按名字升序
+    } else if (option == 3) { // Sort the Name accendingly
         if (left->student->getName() <= right->student->getName()) {
             result = left;
             result->next = mergeSorted(left->next, right, option);
@@ -164,7 +165,7 @@ sList* mergeSorted(sList* left, sList* right, int option) {
             result = right;
             result->next = mergeSorted(left, right->next, option);
         }
-    } else if (option == 4) { // 按名字降序
+    } else if (option == 4) { // Sort the Name descendingly
         if (left->student->getName() >= right->student->getName()) {
             result = left;
             result->next = mergeSorted(left->next, right, option);
@@ -176,7 +177,7 @@ sList* mergeSorted(sList* left, sList* right, int option) {
     return result;
 }
 
-// 拆分链表
+// split the list
 void splitList(sList* source, sList** front, sList** back) {
     if (!source || !source->next) {
         *front = source;
@@ -194,7 +195,7 @@ void splitList(sList* source, sList** front, sList** back) {
     slow->next = nullptr;
 }
 
-// 归并排序
+// merge the whole sort
 sList* mergeSort(sList* head, int option) {
     if (!head || !head->next) return head;
 
