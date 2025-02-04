@@ -134,8 +134,8 @@ void menu(sList *&student, tList *&teacher)
 
 int main()
 {
-	sList *student = nullptr;
-	tList *teacher = nullptr;
+	sList *student = NULL;
+	tList *teacher = NULL;
 
 	menu(student, teacher);
 }

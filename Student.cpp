@@ -38,14 +38,19 @@ void addStudent(sList *&head) {
 
     std::cout << "Enter First Name: ";
     std::cin >> firstName;
+	std::cin.ignore();
     std::cout << "Enter Last Name: ";
     std::cin >> lastName;
+	std::cin.ignore();
     std::cout << "Enter Gender (M/F): ";
     std::cin >> gender;
+	std::cin.ignore();
     std::cout << "Enter Phone Number: ";
     std::cin >> contactNum;
+	std::cin.ignore();
     std::cout << "Enter Email: ";
     std::cin >> email;
+	std::cin.ignore();
     std::cout << "Enter Date Of Birth (DD-MM-YYYY): ";
     std::cin.ignore(); // To ignore the newline character left in the buffer
     std::getline(std::cin, dob);
@@ -56,13 +61,13 @@ void addStudent(sList *&head) {
 }
 
 void addStudentToEnd(sList *&head, sList *newNode) {
-    if (head == nullptr) {
+    if (head == NULL) {
         // If the list is empty, set the new node as the head
         head = newNode;
     } else {
         // Traverse to the end of the list
         sList *current = head;
-        while (current->next != nullptr) {
+        while (current->next != NULL) {
             current = current->next;
         }
         // Link the new node at the end
@@ -105,14 +110,14 @@ void displayStudents(sList *head) {
     }
 
     sList *current = head;
-    int index = 1; // Start numbering from 1
+    int index = 0; // Start numbering from 1
 
-    std::cout << "\n--- Student List ---\n";
-    while (current != nullptr) {
-        std::cout << index << ". ";
+    cout << "\n--- Student List ---\n";
+    while (current != NULL) {
+		index++;
+        cout << index << ". ";
         cout << current->student->getName(); // Display student details
-        std::cout << std::endl; // Add a newline for better readability
+        cout << endl; // Add a newline for better readability
         current = current->next;
-        index++;
     }
 }

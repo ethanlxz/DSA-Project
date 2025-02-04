@@ -97,7 +97,7 @@ struct sList
 
 	// Constructor for sList that initializes a Student object
 	sList(int _id, std::string f, std::string l, char g, std::string c, std::string e, std::string b)
-		: student(new Student(_id, f, l, g, c, e, b))
+		: student(new Student(_id, f, l, g, c, e, b)), next(nullptr)
 	{
 	}
 
@@ -121,7 +121,7 @@ struct tList
 
 	// Constructor for sList that initializes a Teacher object
 	tList(int _id, std::string f, std::string l, char g, std::string c, std::string e, std::string b)
-		: teacher(new Teacher(_id, f, l, g, c, e, b))
+		: teacher(new Teacher(_id, f, l, g, c, e, b)), next(nullptr)
 	{
 	}
 
