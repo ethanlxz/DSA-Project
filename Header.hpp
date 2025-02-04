@@ -36,10 +36,10 @@ extern int totalTeachers;
 class Person
 {
 protected:
-	string fname; // first name
-	string lname; // last name
-	string name;  // first name + last name
-	char gender;  // Gender is either M or F
+	string fname; 
+	string lname; 
+	string name;  // fname + lname
+	char gender;  
 	int id;
 	string email;
 	string bday;
@@ -72,11 +72,12 @@ public:
 class Student : public Person
 {
 private:
-	// string major();
+	string major;
 public:
 	Student();																	// default constructor
-	Student(int _id, string f, string l, char g, string c, string e, string b); // constructor with every necessary info
+	Student(int _id, string f, string l, char g, string c, string e, string b, string major_); // constructor with every necessary info
 	~Student();
+	string getMajor();
 };
 
 class Teacher : public Person
@@ -96,8 +97,8 @@ struct sList
 	sList *next;
 
 	// Constructor for sList that initializes a Student object
-	sList(int _id, std::string f, std::string l, char g, std::string c, std::string e, std::string b)
-		: student(new Student(_id, f, l, g, c, e, b)), next(nullptr)
+	sList(int _id, string f, string l, char g, string c, string e, string b, string major)
+		: student(new Student(_id, f, l, g, c, e, b, major)), next(nullptr)
 	{
 	}
 
@@ -122,7 +123,7 @@ struct tList
 	tList *next;
 
 	// Constructor for sList that initializes a Teacher object
-	tList(int _id, std::string f, std::string l, char g, std::string c, std::string e, std::string b)
+	tList(int _id, string f, string l, char g, string c, string e, string b)
 		: teacher(new Teacher(_id, f, l, g, c, e, b)), next(nullptr)
 	{
 	}
