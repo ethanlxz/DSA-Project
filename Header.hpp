@@ -111,7 +111,9 @@ struct sList
 void addStudent(sList *&head);
 void addStudentToEnd(sList *&head, sList *newNode);
 void deleteStudent(sList *&head);
-void displayStudents(sList *head);
+void displayStudents(sList *&head);
+sList* mergeSort(sList* head, int option);
+
 
 // Linked list for teacher
 struct tList

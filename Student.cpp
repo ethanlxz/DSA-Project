@@ -101,23 +101,109 @@ void deleteStudent(sList *&head) {
     }
     std::cout << "Student not found!\n";
 }
-
 // Function to display all students in the list
-void displayStudents(sList *head) {
-    if (head == nullptr) {
+void displayStudents(sList *&head) {
+    if (!head) {
         std::cout << "No students in the list.\n";
         return;
     }
 
-    sList *current = head;
-    int index = 0; // Start numbering from 1
+    int choice;
+    std::cout << "\nSelect sorting option:\n";
+    std::cout << "1. ID Ascending\n";
+    std::cout << "2. ID Descending\n";
+    std::cout << "3. Name Ascending\n";
+    std::cout << "4. Name Descending\n";
+    std::cout << "Enter choice: ";
+    std::cin >> choice;
 
-    cout << "\n--- Student List ---\n";
-    while (current != NULL) {
-		index++;
-        cout << index << ". ";
-        cout << current->student->getName(); // Display student details
-        cout << endl; // Add a newline for better readability
+    if (choice < 1 || choice > 4) {
+        std::cout << "Invalid choice! Displaying unsorted list.\n";
+    } else {
+        head = mergeSort(head, choice); // 调用归并排序
+    }
+
+    sList *current = head;
+    int index = 1;
+    std::cout << "\n--- Student List ---\n";
+    while (current) {
+        std::cout << index++ << ". " << current->student->getID() 
+                  << " - " << current->student->getName() << std::endl;
         current = current->next;
     }
+}
+
+// 合并两个已排序的链表
+sList* mergeSorted(sList* left, sList* right, int option) {
+    if (!left) return right;
+    if (!right) return left;
+
+    sList* result = nullptr;
+
+    if (option == 1) { // 按 ID 升序
+        if (left->student->getID() <= right->student->getID()) {
+            result = left;
+            result->next = mergeSorted(left->next, right, option);
+        } else {
+            result = right;
+            result->next = mergeSorted(left, right->next, option);
+        }
+    } else if (option == 2) { // 按 ID 降序
+        if (left->student->getID() >= right->student->getID()) {
+            result = left;
+            result->next = mergeSorted(left->next, right, option);
+        } else {
+            result = right;
+            result->next = mergeSorted(left, right->next, option);
+        }
+    } else if (option == 3) { // 按名字升序
+        if (left->student->getName() <= right->student->getName()) {
+            result = left;
+            result->next = mergeSorted(left->next, right, option);
+        } else {
+            result = right;
+            result->next = mergeSorted(left, right->next, option);
+        }
+    } else if (option == 4) { // 按名字降序
+        if (left->student->getName() >= right->student->getName()) {
+            result = left;
+            result->next = mergeSorted(left->next, right, option);
+        } else {
+            result = right;
+            result->next = mergeSorted(left, right->next, option);
+        }
+    }
+    return result;
+}
+
+// 拆分链表
+void splitList(sList* source, sList** front, sList** back) {
+    if (!source || !source->next) {
+        *front = source;
+        *back = nullptr;
+        return;
+    }
+    sList* slow = source;
+    sList* fast = source->next;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    *front = source;
+    *back = slow->next;
+    slow->next = nullptr;
+}
+
+// 归并排序
+sList* mergeSort(sList* head, int option) {
+    if (!head || !head->next) return head;
+
+    sList* left;
+    sList* right;
+    splitList(head, &left, &right);
+
+    left = mergeSort(left, option);
+    right = mergeSort(right, option);
+
+    return mergeSorted(left, right, option);
 }
