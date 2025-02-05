@@ -52,7 +52,6 @@ void addStudent(sList *&head) {
     std::cin >> email;
 	std::cin.ignore();
     std::cout << "Enter Date Of Birth (DD-MM-YYYY): ";
-    std::cin.ignore(); // To ignore the newline character left in the buffer
     std::getline(std::cin, dob);
 
 	addStudentToEnd(head, new sList(studID, firstName, lastName, gender, contactNum, email, dob));
