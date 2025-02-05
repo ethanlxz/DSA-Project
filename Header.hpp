@@ -112,6 +112,7 @@ void addStudent(sList *&head);
 void addStudentToEnd(sList *&head, sList *newNode);
 void deleteStudent(sList *&head);
 void displayStudents(sList *head);
+void searchStudent(sList *head);
 
 // Linked list for teacher
 struct tList

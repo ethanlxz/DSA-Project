@@ -121,3 +121,33 @@ void displayStudents(sList *head) {
         current = current->next;
     }
 }
+
+// Function to search for a student by ID using linear search
+void searchStudent(sList *head) {
+    if (head == NULL) {
+        std::cout << "No students in the list.\n";
+        return;
+    }
+
+    int searchID;
+    std::cout << "Enter the Student ID to search for: ";
+    std::cin >> searchID;
+
+    sList *current = head;
+
+    while (current != NULL) {
+        if (current->student->getID() == searchID) { // Compare student ID
+            std::cout << "\nStudent Found:\n";
+            std::cout << "ID: " << current->student->getID() << std::endl;
+            std::cout << "Name: " << current->student->getName() << std::endl;
+            std::cout << "Gender: " << current->student->getGender() << std::endl;
+            std::cout << "Phone: " << current->student->getContactNum() << std::endl;
+            std::cout << "Email: " << current->student->getEmail() << std::endl;
+            std::cout << "Date Of Birth: " << current->student->getBday() << std::endl;
+            return; // Exit function once found
+        }
+        current = current->next;
+    }
+
+    std::cout << "Student with ID " << searchID << " not found!\n";
+}

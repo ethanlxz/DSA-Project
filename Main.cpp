@@ -37,7 +37,7 @@ void studentMenu(sList *&student)
 			displayStudents(student);
 			break;
 		case 4:
-			cout << "Searching for student" << endl;
+			searchStudent(student);
 			break;
 		case 5:
 			cout << "Exiting student menu." << endl;
