@@ -79,7 +79,7 @@ void teacherMenu(tList *&teacher)
 			deleteTeacher(teacher);
 			break;
 		case 3:
-			cout << "Displaying all teachers" << endl;
+			displayTeacher(teacher);
 			break;
 		case 4:
 			cout << "Searching for teacher" << endl;

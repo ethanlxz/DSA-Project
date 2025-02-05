@@ -101,3 +101,79 @@ void deleteTeacher(tList *&head) {
     }
     std::cout << "Teacher not found!\n"; 
 }
+
+
+// Display the teacher list with sorting options
+void displayTeacher(tList *&head) {
+    if (!head) {
+        std::cout << "No teachers in the list.\n";
+        return;
+    }
+
+    int choice;
+    std::cout << "\nSelect sorting option:\n";
+    std::cout << "1. ID Ascending\n";
+    std::cout << "2. ID Descending\n";
+    std::cout << "3. Name Ascending\n";
+    std::cout << "4. Name Descending\n";
+    std::cout << "Enter choice: ";
+    std::cin >> choice;
+
+    if (choice < 1 || choice > 4) {
+        std::cout << "Invalid choice! Displaying unsorted list.\n";
+    } else {
+        head = insertionSort(head, choice);  // Perform insertion sort
+    }
+
+    // Display sorted teacher list
+    tList *current = head;
+    int index = 1;
+    std::cout << "\n--- Teacher List ---\n";
+    while (current) {
+        std::cout << index++ << ". " << current->teacher->getID() 
+                  << " - " << current->teacher->getName() << std::endl;
+        current = current->next;
+    }
+}
+
+// Insertion Sort for sorting the teacher list
+tList* insertionSort(tList* head, int option) {
+    if (!head || !head->next) return head;  // Empty list or single node
+
+    tList* sorted = nullptr;  // Head of the sorted list
+    tList* current = head;  // Traverse the original list
+
+    while (current) {
+        tList* nextNode = current->next;  // Save the next node
+        sorted = insertSorted(sorted, current, option);
+        current = nextNode;
+    }
+
+    return sorted;
+}
+
+// Insert a node into the sorted linked list
+tList* insertSorted(tList* head, tList* newNode, int option) {
+    if (!head || compare(head, newNode, option)) {
+        newNode->next = head;
+        return newNode;
+    }
+
+    tList* current = head;
+    while (current->next && !compare(current->next, newNode, option)) {
+        current = current->next;
+    }
+
+    newNode->next = current->next;
+    current->next = newNode;
+    return head;
+}
+
+// Comparison function for sorting
+bool compare(tList* a, tList* b, int option) {
+    if (option == 1) return a->teacher->getID() > b->teacher->getID(); // ID Ascending
+    if (option == 2) return a->teacher->getID() < b->teacher->getID(); // ID Descending
+    if (option == 3) return a->teacher->getName() > b->teacher->getName(); // Name Ascending
+    if (option == 4) return a->teacher->getName() < b->teacher->getName(); // Name Descending
+    return false;
+}
