@@ -136,3 +136,4 @@ struct tList
 void addTeacher(tList *&head);
 void addTeacherToEnd(tList *&head, tList *newNode);
 void deleteTeacher(tList *&head);
+void searchTeacher(tList *head);

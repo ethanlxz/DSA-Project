@@ -101,3 +101,33 @@ void deleteTeacher(tList *&head) {
     }
     std::cout << "Teacher not found!\n"; 
 }
+
+// Function to search for a teacher by ID using linear search
+void searchTeacher(tList *head) {
+    if (head == nullptr) {
+        std::cout << "No teachers in the list.\n";
+        return;
+    }
+
+    int searchID;
+    std::cout << "Enter the Teacher ID to search for: ";
+    std::cin >> searchID;
+
+    tList *current = head;
+
+    while (current != nullptr) {
+        if (current->teacher->getID() == searchID) { // Compare teacher ID
+            std::cout << "\nTeacher Found:\n";
+            std::cout << "ID: " << current->teacher->getID() << std::endl;
+            std::cout << "Name: " << current->teacher->getName() << std::endl;
+            std::cout << "Gender: " << current->teacher->getGender() << std::endl;
+            std::cout << "Phone: " << current->teacher->getContactNum() << std::endl;
+            std::cout << "Email: " << current->teacher->getEmail() << std::endl;
+            std::cout << "Date Of Birth: " << current->teacher->getBday() << std::endl;
+            return; // Exit function once found
+        }
+        current = current->next;
+    }
+
+    std::cout << "Teacher with ID " << searchID << " not found!\n";
+}

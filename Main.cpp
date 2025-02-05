@@ -82,7 +82,7 @@ void teacherMenu(tList *&teacher)
 			cout << "Displaying all teachers" << endl;
 			break;
 		case 4:
-			cout << "Searching for teacher" << endl;
+			searchTeacher(teacher);
 			break;
 		case 5:
 			cout << "Exiting teacher menu." << endl;
