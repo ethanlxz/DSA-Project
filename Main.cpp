@@ -19,7 +19,7 @@ void create10Teacher(tList *&head)
 {
 	for (int i = 0; i < 10; i++)
 	{
-		addTeacherToEnd(head, new tList(studID, "test", "teacher", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
+		addTeacherToEnd(head, new tList(teacherID, "test", "teacher", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
 		teacherID++;
 		totalTeachers++;
 	}
