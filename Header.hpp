@@ -141,5 +141,6 @@ void deleteTeacher(tList *&head);
 void displayTeacher(tList *&head);
 tList* insertionSort(tList* head, int option);
 bool compare(tList* a, tList* b, int option);
+tList* insertSorted(tList* sorted, tList* newNode, int option) ;
 
 

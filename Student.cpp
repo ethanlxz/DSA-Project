@@ -149,13 +149,27 @@ void displayStudents(sList *&head)
 
 	sList *current = head;
 	int index = 1;
-	std::cout << "\n--- Student List ---\n";
-	while (current)
-	{
-		std::cout << index++ << ". " << current->student->getID()
-				  << " - " << current->student->getName() << std::endl;
-		current = current->next;
-	}
+    const int idWidth = 6;
+    const int nameWidth = 20;
+
+    // 打印表头
+    std::cout << "-----------------------------------\n";
+    std::cout << "| " << std::left << std::setw(idWidth) << "ID" 
+              << " | " << std::setw(nameWidth) << "Name"
+              << " |\n";
+    std::cout << "-----------------------------------\n";
+
+    // 遍历链表输出数据
+    while (current) {
+        std::cout << "| " << std::left << std::setw(idWidth) << current->student->getID() 
+                  << " | " << std::setw(nameWidth) << current->student->getName() 
+                  << " |\n";
+        current = current->next;
+    }
+
+    // 打印底部线条
+    std::cout << "-----------------------------------\n";
+
 }
 
 // Merge the Sort
