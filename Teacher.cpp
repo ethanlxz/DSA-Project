@@ -102,8 +102,6 @@ void deleteTeacher(tList *&head) {
     std::cout << "Teacher not found!\n"; 
 }
 
-
-// Display the teacher list with sorting options
 void displayTeacher(tList *&head) {
     if (!head) {
         std::cout << "No teachers in the list.\n";
