@@ -225,6 +225,7 @@ void searchStudent(sList *head) {
         int back;
         do {
             std::cout << "Student not found! \nEnter 0 to go back to menu: ";
+			cin.ignore();
             std::cin >> back;
         } while (back != 0);
     }
