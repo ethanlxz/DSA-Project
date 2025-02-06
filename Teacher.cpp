@@ -109,25 +109,104 @@ void searchTeacher(tList *head) {
         return;
     }
 
-    int searchID;
-    std::cout << "Enter the Teacher ID to search for: ";
-    std::cin >> searchID;
+    std::string input;
+    std::cout << "Enter Teacher ID or Name to search: ";
+    std::cin.ignore(); 
+    std::getline(std::cin, input);
+
+    // Check if input is a number (ID) or a name
+    bool isID = std::all_of(input.begin(), input.end(), ::isdigit);
 
     tList *current = head;
+    bool found = false;
 
     while (current != nullptr) {
-        if (current->teacher->getID() == searchID) { // Compare teacher ID
-            std::cout << "\nTeacher Found:\n";
-            std::cout << "ID: " << current->teacher->getID() << std::endl;
-            std::cout << "Name: " << current->teacher->getName() << std::endl;
-            std::cout << "Gender: " << current->teacher->getGender() << std::endl;
-            std::cout << "Phone: " << current->teacher->getContactNum() << std::endl;
-            std::cout << "Email: " << current->teacher->getEmail() << std::endl;
-            std::cout << "Date Of Birth: " << current->teacher->getBday() << std::endl;
-            return; // Exit function once found
+        if ((isID && std::to_string(current->teacher->getID()) == input) || 
+            (!isID && current->teacher->getName() == input)) {
+
+            int choice;
+            found = true;
+
+            do {
+                std::cout << "\n========== Teacher Profile ==========\n";
+                std::cout << "1. ID: " << current->teacher->getID() << std::endl;
+                std::cout << "2. Name: " << current->teacher->getName() << std::endl;
+                std::cout << "3. Gender: " << current->teacher->getGender() << std::endl;
+                std::cout << "4. Phone Number: " << current->teacher->getContactNum() << std::endl;
+                std::cout << "5. Email: " << current->teacher->getEmail() << std::endl;
+                std::cout << "6. Date Of Birth: " << current->teacher->getBday() << std::endl;
+
+                std::cout << "\nEnter the number you want to edit (2-6) or 0 to return to the menu: ";
+                std::cin >> choice;
+                std::cin.ignore();  // Ignore newline left in buffer
+
+                switch (choice) {
+                    case 0:
+                        std::cout << "Returning to menu...\n";
+                        return;
+
+                    case 2: { // Edit Name
+                        std::string fName, lName;
+                        std::cout << "Enter new First Name: ";
+                        std::cin >> fName;
+                        current->teacher->setFname(fName);
+                        std::cout << "Enter new Last Name: ";
+                        std::cin >> lName;
+                        current->teacher->setLname(lName);
+                        current->teacher->setName(); // Update full name
+                        break;
+                    }
+
+                    case 3: { // Edit Gender
+                        char gender;
+                        std::cout << "Enter new Gender (M/F): ";
+                        std::cin >> gender;
+                        current->teacher->setgender(gender);
+                        break;
+                    }
+
+                    case 4: { // Edit Contact Number
+                        std::string contactNum;
+                        std::cout << "Enter new Contact Number: ";
+                        std::cin >> contactNum;
+                        current->teacher->setContactNum(contactNum);
+                        break;
+                    }
+
+                    case 5: { // Edit Email
+                        std::string email;
+                        std::cout << "Enter new Email: ";
+                        std::cin >> email;
+                        current->teacher->setEmail(email);
+                        break;
+                    }
+
+                    case 6: { // Edit Date of Birth
+                        std::string dob;
+                        std::cout << "Enter new Date of Birth (DD-MM-YYYY): ";
+                        std::cin >> dob;
+                        current->teacher->setBday(dob);
+                        break;
+                    }
+
+                    default:
+                        std::cout << "Invalid choice! Please enter a number between 0 and 6.\n";
+                }
+
+            } while (choice != 0);
+
+            std::cout << "Teacher details updated successfully!\n";
+            return;
         }
         current = current->next;
     }
 
-    std::cout << "Teacher with ID " << searchID << " not found!\n";
+    // If teacher not found, force user to press 0 to return to menu
+    if (!found) {
+        int back;
+        do {
+            std::cout << "Teacher not found! \nEnter 0 to go back to menu: ";
+            std::cin >> back;
+        } while (back != 0);
+    }
 }
