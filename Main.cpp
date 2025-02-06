@@ -1,19 +1,27 @@
-#include "Header.hpp"	
+#include "Header.hpp"
 
 int studID = 1;
 int teacherID = 0;
 int totalStudents = 0;
 int totalTeachers = 0;
 
-
-
 void create10Student(sList *&head)
 {
 	for (int i = 0; i < 10; i++)
 	{
-		addStudentToEnd(head, new sList(studID, "test", "test", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
+		addStudentToEnd(head, new sList(studID, "test", "student", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
 		studID++;
 		totalStudents++;
+	}
+}
+
+void create10Teacher(tList *&head)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		addTeacherToEnd(head, new tList(studID, "test", "teacher", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
+		teacherID++;
+		totalTeachers++;
 	}
 }
 
@@ -150,6 +158,7 @@ int main()
 	tList *teacher = NULL;
 
 	create10Student(student);
+	create10Teacher(teacher);
 
 	menu(student, teacher);
 }
