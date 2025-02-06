@@ -1,9 +1,21 @@
 #include "Header.hpp"	
 
-int studID = 0;
+int studID = 1;
 int teacherID = 0;
 int totalStudents = 0;
 int totalTeachers = 0;
+
+
+
+void create10Student(sList *&head)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		addStudentToEnd(head, new sList(studID, "test", "test", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
+		studID++;
+		totalStudents++;
+	}
+}
 
 void studentMenu(sList *&student)
 {
@@ -37,7 +49,7 @@ void studentMenu(sList *&student)
 			displayStudents(student);
 			break;
 		case 4:
-			cout << "Searching for student" << endl;
+			searchStudent(student);
 			break;
 		case 5:
 			cout << "Exiting student menu." << endl;
@@ -82,7 +94,7 @@ void teacherMenu(tList *&teacher)
 			cout << "Displaying all teachers" << endl;
 			break;
 		case 4:
-			cout << "Searching for teacher" << endl;
+			searchTeacher(teacher);
 			break;
 		case 5:
 			cout << "Exiting teacher menu." << endl;
@@ -136,6 +148,8 @@ int main()
 {
 	sList *student = NULL;
 	tList *teacher = NULL;
+
+	create10Student(student);
 
 	menu(student, teacher);
 }
