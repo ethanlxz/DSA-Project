@@ -120,6 +120,76 @@ void deleteStudent(sList *&head)
 	std::cout << "Student not found!\n";
 }
 
+void editStudent(sList *&head, int id) {
+    sList *current = head;
+    while (current) {
+        if (current->student->getID() == id) {
+            std::cout << "\nEditing Student: " << current->student->getName() << "\n";
+
+            int editChoice;
+            std::cout << "Choose the information to edit:\n";
+            std::cout << "1. First Name\n";
+            std::cout << "2. Last Name\n";
+            std::cout << "3. Gender\n";
+            std::cout << "4. Phone Number\n";
+            std::cout << "5. Email\n";
+            std::cout << "6. Date of Birth\n";
+            std::cout << "7. Major\n";
+            std::cout << "Enter choice: ";
+            std::cin >> editChoice;
+
+            std::string newInput;
+            char newGender;
+            switch (editChoice) {
+                case 1: // First Name
+                    std::cout << "Enter new First Name: ";
+                    std::cin >> newInput;
+                    current->student->setFname(newInput);
+                    break;
+                case 2: // Last Name
+                    std::cout << "Enter new Last Name: ";
+                    std::cin >> newInput;
+                    current->student->setLname(newInput);
+                    break;
+                case 3: // Gender
+                    std::cout << "Enter new Gender (M/F): ";
+                    std::cin >> newGender;
+                    current->student->setgender(newGender);
+                    break;
+                case 4: // Phone Number
+                    std::cout << "Enter new Phone Number: ";
+                    std::cin >> newInput;
+                    current->student->setContactNum(newInput);
+                    break;
+                case 5: // Email
+                    std::cout << "Enter new Email: ";
+                    std::cin >> newInput;
+                    current->student->setEmail(newInput);
+                    break;
+                case 6: // Date of Birth
+                    std::cout << "Enter new Date of Birth (DD-MM-YYYY): ";
+                    std::cin >> newInput;
+                    current->student->setBday(newInput);
+                    break;
+                case 7: // Major
+                    std::cout << "Enter new Major: ";
+                    std::cin >> newInput;
+                    // You should add a method to set major if necessary
+                    // current->student->setMajor(newInput);
+                    break;
+                default:
+                    std::cout << "Invalid choice.\n";
+            }
+
+            std::cout << "Student information updated successfully.\n";
+            return;
+        }
+        current = current->next;
+    }
+
+    std::cout << "Student not found!\n";
+}
+
 // Function to display all students in the list
 void displayStudents(sList *&head)
 {
@@ -144,7 +214,7 @@ void displayStudents(sList *&head)
 	}
 	else
 	{
-		head = mergeSort(head, choice); // 调用归并排序
+		head = mergeSort(head, choice); // Perform Merge Sort
 	}
 
 	sList *current = head;
@@ -152,14 +222,13 @@ void displayStudents(sList *&head)
     const int idWidth = 6;
     const int nameWidth = 20;
 
-    // 打印表头
+    // Print the output of the display student list
     std::cout << "-----------------------------------\n";
     std::cout << "| " << std::left << std::setw(idWidth) << "ID" 
               << " | " << std::setw(nameWidth) << "Name"
               << " |\n";
     std::cout << "-----------------------------------\n";
 
-    // 遍历链表输出数据
     while (current) {
         std::cout << "| " << std::left << std::setw(idWidth) << current->student->getID() 
                   << " | " << std::setw(nameWidth) << current->student->getName() 
@@ -167,9 +236,12 @@ void displayStudents(sList *&head)
         current = current->next;
     }
 
-    // 打印底部线条
     std::cout << "-----------------------------------\n";
 
+int studentID;
+    std::cout << "\nEnter the student ID to edit: ";
+    std::cin >> studentID;
+    editStudent(head, studentID);  // Call edit function
 }
 
 // Merge the Sort
