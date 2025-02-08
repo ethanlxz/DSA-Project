@@ -36,14 +36,18 @@ void addTeacher(tList *&head)
 	char gender;
 
 	cout << "Enter First Name: ";
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, firstName);
 	cout << "Enter Last Name: ";
-	getline(cin, lastName);
+	getline(cin, lastName); 
 	cout << "Enter Gender (M/F): ";
 	cin >> gender;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cout << "Enter Phone Number: ";
+	cin.ignore();
 	getline(cin, contactNum);
 	cout << "Enter Email: ";
+	cin.ignore();
 	getline(cin, email);
 	cout << "Enter Date Of Birth (DD-MM-YYYY): ";
 	cin.ignore(); // To ignore the newline character left in the buffer
@@ -96,12 +100,12 @@ void deleteTeacher(tList *&head)
 		if (current->teacher->getName() == name || (to_string(current->teacher->getID()) == name))
 		{
 			if (previous == nullptr)
-				head = current->next; // Deleting the head
+				head = current->next; // Deleting the head	
 			else
 				previous->next = current->next; // Bypass the current node
 
 			delete current; // Free memory
-			cout << "Teacher deleted successfully! Press any key to return\n";
+			cout << RED << "Teacher deleted successfully! Press any key to return\n" << RESET;
 			cin >> input;
 			return;
 		}

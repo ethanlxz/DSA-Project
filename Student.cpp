@@ -48,22 +48,19 @@ void addStudent(sList *&head)
 	char gender;
 
 	cout << "Enter First Name: ";
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	getline(cin, firstName);
-	cin.ignore();
 	cout << "Enter Last Name: ";
 	getline(cin, lastName);
-	cin.ignore();
 	cout << "Enter Gender (M/F): ";
 	cin >> gender;
-	cin.ignore();
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	cout << "Enter Phone Number: ";
 	getline(cin, contactNum);
-	cin.ignore();
 	cout << "Enter Email: ";
 	getline(cin, email);
 	cin.ignore();
 	cout << "Enter Date Of Birth (DD-MM-YYYY): ";
-	cin.ignore(); // To ignore the newline character left in the buffer
 	getline(cin, dob);
 	cout << "Enter your major: "; // To ignore the newline character left in the buffer
 	getline(cin, major);
@@ -71,7 +68,7 @@ void addStudent(sList *&head)
 	// Add the student to the end of list
 	addStudentToEnd(head, new sList(studID, firstName, lastName, gender, contactNum, email, dob, major));
 
-	cout << "Student added successfully!\n";
+	cout << GREEN << "Student added successfully!\n" << RESET;
 	studID++;
 	totalStudents++;
 }
@@ -104,7 +101,7 @@ void deleteStudent(sList *&head)
 	cin.ignore();
 	getline(cin, name); // Get the input from the user
 
-	sList *current = head; // Pointer to the current node
+	sList *current = head;	   // Pointer to the current node
 	sList *previous = nullptr; // Pointer to the previous student node
 
 	while (current != nullptr)
@@ -117,14 +114,16 @@ void deleteStudent(sList *&head)
 				previous->next = current->next; // Bypass the current node
 
 			delete current; // Free memory
-			cout << RED << "Student deleted successfully! Press any key to return\n" << WHITE;
+			cout << RED << "Student deleted successfully! Press any key to return\n"
+				 << WHITE;
 			cin >> input;
 			return;
 		}
 		previous = current;
 		current = current->next; // Move to the next student
 	}
-	cout << RED << "Student not found! Press any key to return\n" << WHITE;
+	cout << RED << "Student not found! Press any key to return\n"
+		 << WHITE;
 	cin >> input;
 	return;
 }
@@ -152,7 +151,7 @@ void searchStudent(sList *head)
 	while (current != NULL)
 	{
 		if ((to_string(current->student->getID()) == input) ||
-			(current->student->getName() == input))  // If the student is found
+			(current->student->getName() == input)) // If the student is found
 		{
 
 			int choice;
@@ -179,7 +178,8 @@ void searchStudent(sList *head)
 				switch (choice)
 				{
 				case 0:
-					cout << RED << "Returning to menu...\n" << WHITE;
+					cout << RED << "Returning to menu...\n"
+						 << WHITE;
 					return;
 
 				case 2:
@@ -295,7 +295,8 @@ void displayStudents(sList *head)
 			return;
 		else if (choice < 1 || choice > 4)
 		{
-			cout << RED << "Invalid choice! Try again.\n"<< WHITE;
+			cout << RED << "Invalid choice! Try again.\n"
+				 << WHITE;
 		}
 		else
 		{
@@ -312,16 +313,16 @@ void displayStudents(sList *head)
 	cout << YELLOW;
 	cout << "-----------------------------------\n";
 	cout << "| " << left << setw(idWidth) << "ID"
-			  << " | " << setw(nameWidth) << "Name"
-			  << " |\n";
+		 << " | " << setw(nameWidth) << "Name"
+		 << " |\n";
 	cout << "-----------------------------------\n";
 	cout << GREEN;
 
 	while (current) // Traverse the list
 	{
 		cout << "| " << left << setw(idWidth) << current->student->getID()
-				  << " | " << setw(nameWidth) << current->student->getName()
-				  << " |\n";
+			 << " | " << setw(nameWidth) << current->student->getName()
+			 << " |\n";
 		current = current->next; // Move to the next student
 	}
 

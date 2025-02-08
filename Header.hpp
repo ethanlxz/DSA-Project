@@ -69,22 +69,20 @@ public:
 	string getContactNum();
 };
 
-class Student : public Person
+class Student : public Person // inherits from person class
 {
 private:
 	string major;
 public:
-	Student();																	// default constructor
-	Student(int _id, string f, string l, char g, string c, string e, string b, string major_); // constructor with every necessary info
+	Student();																	
+	Student(int _id, string f, string l, char g, string c, string e, string b, string major_); 
 	~Student();
 	string getMajor();
 	void setMajor(string m);
 };
 
-class Teacher : public Person
+class Teacher : public Person // inherits from person class
 {
-private:
-	// string assignedCourse;
 
 public:
 	Teacher();																	// default constructor
