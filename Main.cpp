@@ -9,7 +9,7 @@ void create10Student(sList *&head)
 {
 	for (int i = 0; i < 10; i++)
 	{
-		addStudentToEnd(head, new sList(studID, "test", "student", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
+		addStudentToEnd(head, new sList(studID, "test", "student", 'M', "0123-3455", "test@gmail.com", "12-12-2000", "Diploma in IT"));
 		studID++;
 		totalStudents++;
 	}
@@ -39,7 +39,7 @@ void studentMenu(sList *&student)
 		cout << "1. Add Student" << endl;
 		cout << "2. Remove Student" << endl;
 		cout << "3. Display Student" << endl;
-		cout << "4. Search Student" << endl;
+		cout << "4. Search/Edit Student" << endl;
 		cout << "5. Exit" << endl;
 		cout << YELLOW;
 		cout << "Enter the number you want to go" << endl;
@@ -84,7 +84,7 @@ void teacherMenu(tList *&teacher)
 		cout << "1. Add Teacher" << endl;
 		cout << "2. Remove Teacher" << endl;
 		cout << "3. Display Teacher" << endl;
-		cout << "4. Search Teacher" << endl;
+		cout << "4. Search/Exit Teacher" << endl;
 		cout << "5. Exit" << endl;
 		cout << YELLOW;
 		cout << "Enter the number you want to go" << endl;
@@ -157,7 +157,7 @@ int main()
 	sList *student = NULL;
 	tList *teacher = NULL;
 
-	create10Student(student);
+	// create10Student(student);
 	create10Teacher(teacher);
 
 	menu(student, teacher);

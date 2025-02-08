@@ -72,11 +72,13 @@ public:
 class Student : public Person
 {
 private:
-	// string major();
+	string major;
 public:
 	Student();																	// default constructor
-	Student(int _id, string f, string l, char g, string c, string e, string b); // constructor with every necessary info
+	Student(int _id, string f, string l, char g, string c, string e, string b, string major_); // constructor with every necessary info
 	~Student();
+	string getMajor();
+	void setMajor(string m);
 };
 
 class Teacher : public Person
@@ -96,8 +98,8 @@ struct sList
 	sList *next;
 
 	// Constructor for sList that initializes a Student object
-	sList(int _id, std::string f, std::string l, char g, std::string c, std::string e, std::string b)
-		: student(new Student(_id, f, l, g, c, e, b)), next(nullptr)
+	sList(int _id, string f, string l, char g, string c, string e, string b, string major)
+		: student(new Student(_id, f, l, g, c, e, b, major)), next(nullptr)
 	{
 	}
 
@@ -111,8 +113,11 @@ struct sList
 void addStudent(sList *&head);
 void addStudentToEnd(sList *&head, sList *newNode);
 void deleteStudent(sList *&head);
-void displayStudents(sList *head);
-void searchStudent(sList *head);
+
+void searchStudent(sList *head); // uses Linear Search
+
+void displayStudents(sList *head);// uses Merge Sort
+sList* mergeSort(sList* head, int option);
 
 // Linked list for teacher
 struct tList
@@ -137,3 +142,8 @@ void addTeacher(tList *&head);
 void addTeacherToEnd(tList *&head, tList *newNode);
 void deleteTeacher(tList *&head);
 void searchTeacher(tList *head);
+
+void displayTeacher(tList *&head);
+tList* insertionSort(tList* head, int option);
+bool compare(tList* a, tList* b, int option);
+tList* insertSorted(tList* sorted, tList* newNode, int option) ;
