@@ -28,7 +28,7 @@ Teacher::~Teacher()
 {
 }
 
-// Function to add a new teacher
+// Function to add a new teacher to the linked list
 void addTeacher(tList *&head)
 {
 	// Get the teacher details from the user
@@ -253,21 +253,21 @@ void displayTeacher(tList *&head)
 	{
 	int choice;
 	cout << YELLOW;
-	std::cout << "\nSelect sorting option:\n";
+	cout << "\nSelect sorting option:\n";
 	cout << GREEN;
-	std::cout << "1. ID Ascending\n";
-	std::cout << "2. ID Descending\n";
-	std::cout << "3. Name Ascending\n";
-	std::cout << "4. Name Descending\n";
+	cout << "1. ID Ascending\n";
+	cout << "2. ID Descending\n";
+	cout << "3. Name Ascending\n";
+	cout << "4. Name Descending\n";
 	cout << YELLOW;
-	std::cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
-	std::cin >> choice;
+	cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
+	cin >> choice;
 
 	if (choice == 0)
 		return;
 	else if (choice < 1 || choice > 4)
 	{
-		std::cout << RED <<"Invalid choice! Try again.\n" << WHITE;
+		cout << RED <<"Invalid choice! Try again.\n" << WHITE;
 	}
 	else
 	{
@@ -283,25 +283,25 @@ void displayTeacher(tList *&head)
 
 	// Print the display Teacher List
 	cout << YELLOW;
-	std::cout << "-----------------------------------\n";
-	std::cout << "| " << std::left << std::setw(idWidth) << "ID"
-			  << " | " << std::setw(nameWidth) << "Name"
+	cout << "-----------------------------------\n";
+	cout << "| " << left << setw(idWidth) << "ID"
+			  << " | " << setw(nameWidth) << "Name"
 			  << " |\n";
-	std::cout << "-----------------------------------\n";
-	std::cout << GREEN;
+	cout << "-----------------------------------\n";
+	cout << GREEN;
 
 	while (current) // Traverse the list
 	{
-		std::cout << "| " << std::left << std::setw(idWidth) << current->teacher->getID()
-				  << " | " << std::setw(nameWidth) << current->teacher->getName()
+		cout << "| " << left << setw(idWidth) << current->teacher->getID()
+				  << " | " << setw(nameWidth) << current->teacher->getName()
 				  << " |\n";
 		current = current->next; // Move to the next node
 	}
 
-	std::cout << "-----------------------------------\n";
+	cout << "-----------------------------------\n";
 
 	int input;
-	std::cout << YELLOW << "\nPress any key to return : " << WHITE;
+	cout << YELLOW << "\nPress any key to return : " << WHITE;
 	cin >> input;
 	return;
 }

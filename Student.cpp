@@ -40,10 +40,11 @@ Student::~Student()
 {
 }
 
+// Function that adds a new student to the linked list
 void addStudent(sList *&head)
 {
 	// Get the student details from the user
-	std::string id, firstName, lastName, contactNum, email, dob, major;
+	string id, firstName, lastName, contactNum, email, dob, major;
 	char gender;
 
 	cout << "Enter First Name: ";
@@ -70,7 +71,7 @@ void addStudent(sList *&head)
 	// Add the student to the end of list
 	addStudentToEnd(head, new sList(studID, firstName, lastName, gender, contactNum, email, dob, major));
 
-	std::cout << "Student added successfully!\n";
+	cout << "Student added successfully!\n";
 	studID++;
 	totalStudents++;
 }
@@ -280,21 +281,21 @@ void displayStudents(sList *head)
 	while (1)
 	{
 		cout << YELLOW;
-		std::cout << "\nSelect sorting option:\n";
+		cout << "\nSelect sorting option:\n";
 		cout << GREEN;
-		std::cout << "1. ID Ascending\n";
-		std::cout << "2. ID Descending\n";
-		std::cout << "3. Name Ascending\n";
-		std::cout << "4. Name Descending\n";
+		cout << "1. ID Ascending\n";
+		cout << "2. ID Descending\n";
+		cout << "3. Name Ascending\n";
+		cout << "4. Name Descending\n";
 		cout << YELLOW;
-		std::cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
-		std::cin >> choice;
+		cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
+		cin >> choice;
 
 		if (choice == 0)
 			return;
 		else if (choice < 1 || choice > 4)
 		{
-			std::cout << RED << "Invalid choice! Try again.\n"<< WHITE;
+			cout << RED << "Invalid choice! Try again.\n"<< WHITE;
 		}
 		else
 		{
@@ -308,26 +309,26 @@ void displayStudents(sList *head)
 	const int nameWidth = 20;
 
 	// Print the output of the display student list
-	std::cout << YELLOW;
-	std::cout << "-----------------------------------\n";
-	std::cout << "| " << std::left << std::setw(idWidth) << "ID"
-			  << " | " << std::setw(nameWidth) << "Name"
+	cout << YELLOW;
+	cout << "-----------------------------------\n";
+	cout << "| " << left << setw(idWidth) << "ID"
+			  << " | " << setw(nameWidth) << "Name"
 			  << " |\n";
-	std::cout << "-----------------------------------\n";
-	std::cout << GREEN;
+	cout << "-----------------------------------\n";
+	cout << GREEN;
 
 	while (current) // Traverse the list
 	{
-		std::cout << "| " << std::left << std::setw(idWidth) << current->student->getID()
-				  << " | " << std::setw(nameWidth) << current->student->getName()
+		cout << "| " << left << setw(idWidth) << current->student->getID()
+				  << " | " << setw(nameWidth) << current->student->getName()
 				  << " |\n";
 		current = current->next; // Move to the next student
 	}
 
-	std::cout << "-----------------------------------\n";
+	cout << "-----------------------------------\n";
 
 	int input;
-	std::cout << "\nPress any key to return : " << WHITE;
+	cout << "\nPress any key to return : " << WHITE;
 	cin >> input;
 	return;
 }
