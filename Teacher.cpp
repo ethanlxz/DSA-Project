@@ -34,27 +34,25 @@ void addTeacher(tList *&head)
 	string firstName, lastName, contactNum, email, dob;
 	char gender;
 
-	teacherID++;
-	totalTeachers++;
-
 	cout << "Enter First Name: ";
-	cin >> firstName;
+	getline(cin, firstName);
 	cout << "Enter Last Name: ";
-	cin >> lastName;
+	getline(cin, lastName);
 	cout << "Enter Gender (M/F): ";
 	cin >> gender;
 	cout << "Enter Phone Number: ";
-	cin >> contactNum;
+	getline(cin, contactNum);
 	cout << "Enter Email: ";
-	cin >> email;
+	getline(cin, email);
 	cout << "Enter Date Of Birth (DD-MM-YYYY): ";
 	cin.ignore(); // To ignore the newline character left in the buffer
 	getline(cin, dob);
 
 	addTeacherToEnd(head, new tList(teacherID, firstName, lastName, gender, contactNum, email, dob));
 
-	cout << GREEN << "Teacher added successfully!\n"
-		 << WHITE;
+	cout << GREEN << "Teacher added successfully!\n"<< WHITE;
+	teacherID++;
+	totalTeachers++;
 }
 
 // Function to add a new teacher node to the end of the list
@@ -169,10 +167,10 @@ void searchTeacher(tList *head)
 				{ // Edit Name
 					string fName, lName;
 					cout << "Enter new First Name: ";
-					cin >> fName;
+					getline(cin, fName);
 					current->teacher->setFname(fName);
 					cout << "Enter new Last Name: ";
-					cin >> lName;
+					getline(cin, lName);
 					current->teacher->setLname(lName);
 					current->teacher->setName(); // Update full name
 					break;
@@ -191,7 +189,7 @@ void searchTeacher(tList *head)
 				{ // Edit Contact Number
 					string contactNum;
 					cout << "Enter new Contact Number: ";
-					cin >> contactNum;
+					getline(cin, contactNum);
 					current->teacher->setContactNum(contactNum);
 					break;
 				}
@@ -200,7 +198,7 @@ void searchTeacher(tList *head)
 				{ // Edit Email
 					string email;
 					cout << "Enter new Email: ";
-					cin >> email;
+					getline(cin, email);
 					current->teacher->setEmail(email);
 					break;
 				}
@@ -209,7 +207,7 @@ void searchTeacher(tList *head)
 				{ // Edit Date of Birth
 					string dob;
 					cout << "Enter new Date of Birth (DD-MM-YYYY): ";
-					cin >> dob;
+					getline(cin, dob);
 					current->teacher->setBday(dob);
 					break;
 				}

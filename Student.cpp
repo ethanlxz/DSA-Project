@@ -45,33 +45,32 @@ void addStudent(sList *&head)
 	std::string id, firstName, lastName, contactNum, email, dob, major;
 	char gender;
 
-	studID++;
-	totalStudents++;
-
-	std::cout << "Enter First Name: ";
-	std::cin >> firstName;
-	std::cin.ignore();
-	std::cout << "Enter Last Name: ";
-	std::cin >> lastName;
-	std::cin.ignore();
-	std::cout << "Enter Gender (M/F): ";
-	std::cin >> gender;
-	std::cin.ignore();
-	std::cout << "Enter Phone Number: ";
-	std::cin >> contactNum;
-	std::cin.ignore();
-	std::cout << "Enter Email: ";
-	std::cin >> email;
-	std::cin.ignore();
-	std::cout << "Enter Date Of Birth (DD-MM-YYYY): ";
-	std::cin.ignore(); // To ignore the newline character left in the buffer
-	std::getline(std::cin, dob);
-	std::cout << "Enter your major: "; // To ignore the newline character left in the buffer
-	std::getline(std::cin, major);
+	cout << "Enter First Name: ";
+	getline(cin, firstName);
+	cin.ignore();
+	cout << "Enter Last Name: ";
+	getline(cin, lastName);
+	cin.ignore();
+	cout << "Enter Gender (M/F): ";
+	cin >> gender;
+	cin.ignore();
+	cout << "Enter Phone Number: ";
+	getline(cin, contactNum);
+	cin.ignore();
+	cout << "Enter Email: ";
+	getline(cin, email);
+	cin.ignore();
+	cout << "Enter Date Of Birth (DD-MM-YYYY): ";
+	cin.ignore(); // To ignore the newline character left in the buffer
+	getline(cin, dob);
+	cout << "Enter your major: "; // To ignore the newline character left in the buffer
+	getline(cin, major);
 
 	addStudentToEnd(head, new sList(studID, firstName, lastName, gender, contactNum, email, dob, major));
 
 	std::cout << "Student added successfully!\n";
+	studID++;
+	totalStudents++;
 }
 
 void addStudentToEnd(sList *&head, sList *newNode)
@@ -96,8 +95,9 @@ void addStudentToEnd(sList *&head, sList *newNode)
 // Function to delete a student by name
 void deleteStudent(sList *&head)
 {
+	int input;
 	string name;
-	cout << "Enter the full name of the student to delete: ";
+	cout << YELLOW << "Enter the full name / ID of the student to delete: " << WHITE; // Ask for the name of the student to delete
 	cin.ignore();
 	getline(cin, name);
 
@@ -106,7 +106,7 @@ void deleteStudent(sList *&head)
 
 	while (current != nullptr)
 	{
-		if (current->student->getName() == name)
+		if (current->student->getName() == name || (to_string(current->student->getID()) == name))
 		{
 			if (previous == nullptr)
 			{
@@ -117,7 +117,8 @@ void deleteStudent(sList *&head)
 				previous->next = current->next; // Bypass the current node
 			}
 			delete current; // Free memory
-			cout << "Student deleted successfully!\n";
+			cout << RED << "Student deleted successfully! Press any key to return\n" << WHITE;
+			cin >> input;
 			return;
 		}
 		previous = current;
@@ -187,10 +188,10 @@ void searchStudent(sList *head)
 				{ // Edit Name
 					string fName, lName;
 					cout << "Enter new First Name: ";
-					cin >> fName;
+					getline(cin, fName);
 					current->student->setFname(fName);
 					cout << "Enter new Last Name: ";
-					cin >> lName;
+					getline(cin, lName);
 					current->student->setLname(lName);
 					current->student->setName();
 					break;
@@ -209,7 +210,7 @@ void searchStudent(sList *head)
 				{ // Edit Contact Number
 					string contactNum;
 					cout << "Enter new Contact Number: ";
-					cin >> contactNum;
+					getline(cin, contactNum);
 					current->student->setContactNum(contactNum);
 					break;
 				}
@@ -218,7 +219,7 @@ void searchStudent(sList *head)
 				{ // Edit Email
 					string email;
 					cout << "Enter new Email: ";
-					cin >> email;
+					getline(cin, email);
 					current->student->setEmail(email);
 					break;
 				}
@@ -227,7 +228,7 @@ void searchStudent(sList *head)
 				{ // Edit Date of Birth
 					string dob;
 					cout << "Enter new Date of Birth (DD-MM-YYYY): ";
-					cin >> dob;
+					getline(cin, dob);
 					current->student->setBday(dob);
 					break;
 				}
@@ -236,7 +237,7 @@ void searchStudent(sList *head)
 				{ // Edit Major
 					string major;
 					cout << "Enter new Major: ";
-					cin >> major;
+					getline(cin, major);
 					current->student->setMajor(major);
 					break;
 				}
