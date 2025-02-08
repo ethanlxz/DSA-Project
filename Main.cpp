@@ -1,7 +1,7 @@
 #include "Header.hpp"
 
 int studID = 1;
-int teacherID = 0;
+int teacherID = 1;
 int totalStudents = 0;
 int totalTeachers = 0;
 
@@ -157,7 +157,7 @@ int main()
 	sList *student = NULL;
 	tList *teacher = NULL;
 
-	// create10Student(student);
+	create10Student(student);
 	create10Teacher(teacher);
 
 	menu(student, teacher);

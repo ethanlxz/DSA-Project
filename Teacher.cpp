@@ -80,7 +80,7 @@ void addTeacherToEnd(tList *&head, tList *newNode)
 void deleteTeacher(tList *&head)
 {
 	string name;
-	cout << "Enter the full name of the teacher to delete: ";
+	cout << "Enter the full name/ ID of the teacher to delete: ";
 	cin.ignore();
 	getline(cin, name);
 
@@ -90,7 +90,7 @@ void deleteTeacher(tList *&head)
 	while (current != nullptr)
 	{
 		// Check if the current teacher's name matches the input name
-		if (current->teacher->getName() == name)
+		if (current->teacher->getName() == name || (to_string(current->teacher->getID()) == name))
 		{
 			if (previous == nullptr)
 			{
