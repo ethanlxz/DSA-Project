@@ -238,10 +238,10 @@ void displayStudents(sList *&head)
 
     std::cout << "-----------------------------------\n";
 
-int studentID;
-    std::cout << "\nEnter the student ID to edit: ";
-    std::cin >> studentID;
-    editStudent(head, studentID);  // Call edit function
+	int input;
+    std::cout << "\nPress any key to return ";
+	cin >> input;
+	return;
 }
 
 // Merge the Sort
