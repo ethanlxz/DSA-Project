@@ -147,3 +147,45 @@ void displayTeacher(tList *&head);
 tList* insertionSort(tList* head, int option);
 bool compare(tList* a, tList* b, int option);
 tList* insertSorted(tList* sorted, tList* newNode, int option) ;
+
+
+// Queue node
+struct node {
+    int id;         // ID of the person submitting the problem
+    string role;    // Role of the person (Student/Teacher)
+    string problem; // Description of the problem
+    node *next;     // Pointer to the next node in the queue
+};
+
+// Class to implement a queue (FIFO) for problem tickets
+class ADTqueue {
+private:
+    node *front_, *rear; // Pointers to track the front and rear of the queue
+    int count;          // Count of tickets in the queue
+
+public:
+    ADTqueue();
+
+    bool empty();
+    void append(int id, const string& role, const string& problem); 
+    void serve(); 
+    int size(); 
+    void display();
+    string front();
+};
+
+// Class to manage administrative tasks (handling problem tickets)
+class Admin {
+private:
+    ADTqueue problemQueue; // Queue to store submitted problems
+    int solvedCount;       // Counter to track the number of solved problems
+
+public:
+    Admin();
+
+    void submitProblem(int id, const string& role, const string& problem);
+    void viewProblem();
+    void solveProblem();
+};
+
+void submitTicket(Admin &ad, const string &role);

@@ -114,9 +114,9 @@ void deleteTeacher(tList *&head)
 // Function to search for a teacher by ID using linear search
 void searchTeacher(tList *head)
 {
-	if (head == NULL)
+	if (head == NULL) // If the list is empty
 	{
-		int input;
+		string input;
 		cout << RED "No teachers in the list. Press any key to return :" << WHITE;
 		cin >> input;
 		return;
@@ -128,7 +128,7 @@ void searchTeacher(tList *head)
 	getline(cin, input);
 
 	tList *current = head;
-	bool found = false;
+	bool found = false; // Flag to indicate if the teacher is found
 
 	while (current != nullptr)
 	{
@@ -223,7 +223,7 @@ void searchTeacher(tList *head)
 				 << WHITE;
 			return;
 		}
-		current = current->next;
+		current = current->next; // Move to the next node
 	}
 
 	// If teacher not found, force user to press 0 to return to menu
@@ -239,9 +239,9 @@ void searchTeacher(tList *head)
 // Function to display all teachers in the list
 void displayTeacher(tList *&head)
 {
-	if (head == NULL)
+	if (head == NULL) // If the list is empty
 	{
-		int input;
+		string input;
 		cout << RED "No teachers in the list. Press any key to return :" << WHITE;
 		cin >> input;
 		return;
@@ -276,7 +276,6 @@ void displayTeacher(tList *&head)
 
 	// Display sorted teacher list
 	tList *current = head;
-	int index = 1;
 	const int idWidth = 6;
 	const int nameWidth = 20;
 
@@ -289,12 +288,12 @@ void displayTeacher(tList *&head)
 	std::cout << "-----------------------------------\n";
 	std::cout << GREEN;
 
-	while (current)
+	while (current) // Traverse the list
 	{
 		std::cout << "| " << std::left << std::setw(idWidth) << current->teacher->getID()
 				  << " | " << std::setw(nameWidth) << current->teacher->getName()
 				  << " |\n";
-		current = current->next;
+		current = current->next; // Move to the next node
 	}
 
 	std::cout << "-----------------------------------\n";

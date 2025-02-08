@@ -130,9 +130,9 @@ void deleteStudent(sList *&head)
 // Function to search for a student by ID using linear search
 void searchStudent(sList *head)
 {
-	if (head == NULL)
+	if (head == NULL) // If the list is empty
 	{
-		int input;
+		string input;
 		cout << RED "No students in the list. Press any key to return\n"
 			 << WHITE;
 		cin >> input;
@@ -142,18 +142,15 @@ void searchStudent(sList *head)
 	string input;
 	cout << "Enter Student ID or Name to search: ";
 	cin.ignore();
-	getline(cin, input);
-
-	// Check if the input is a number (ID) or a name
-	bool isID = all_of(input.begin(), input.end(), ::isdigit);
+	getline(cin, input); // Get the input from the user
 
 	sList *current = head;
-	bool found = false;
+	bool found = false; // Flag to indicate if the student is found
 
 	while (current != NULL)
 	{
 		if ((to_string(current->student->getID()) == input) ||
-			(current->student->getName() == input))
+			(current->student->getName() == input))  // If the student is found
 		{
 
 			int choice;
@@ -180,8 +177,7 @@ void searchStudent(sList *head)
 				switch (choice)
 				{
 				case 0:
-					cout << RED << "Returning to menu...\n"
-						 << WHITE;
+					cout << RED << "Returning to menu...\n" << WHITE;
 					return;
 
 				case 2:
@@ -253,7 +249,7 @@ void searchStudent(sList *head)
 				 << WHITE;
 			return;
 		}
-		current = current->next;
+		current = current->next; // Move to the next student
 	}
 
 	// If student not found, force user to press 0 to return to menu
@@ -271,9 +267,9 @@ void searchStudent(sList *head)
 // Function to display all students in the list
 void displayStudents(sList *head)
 {
-	if (head == NULL)
+	if (head == NULL) // If the list is empty
 	{
-		int input;
+		string input;
 		cout << RED "No students in the list. Press any key to return :" << WHITE;
 		cin >> input;
 		return;
@@ -307,7 +303,6 @@ void displayStudents(sList *head)
 	}
 
 	sList *current = head;
-	int index = 1;
 	const int idWidth = 6;
 	const int nameWidth = 20;
 
@@ -320,12 +315,12 @@ void displayStudents(sList *head)
 	std::cout << "-----------------------------------\n";
 	std::cout << GREEN;
 
-	while (current)
+	while (current) // Traverse the list
 	{
 		std::cout << "| " << std::left << std::setw(idWidth) << current->student->getID()
 				  << " | " << std::setw(nameWidth) << current->student->getName()
 				  << " |\n";
-		current = current->next;
+		current = current->next; // Move to the next student
 	}
 
 	std::cout << "-----------------------------------\n";

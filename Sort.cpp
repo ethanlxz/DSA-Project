@@ -1,9 +1,8 @@
 #include "Header.hpp"
 
-
 // Merge Sort for sorting the student list
 
-
+// Merge two sorted linked lists
 sList *mergeSorted(sList *left, sList *right, int option)
 {
 	if (!left)
@@ -68,7 +67,7 @@ sList *mergeSorted(sList *left, sList *right, int option)
 	return result;
 }
 
-// split the list
+// Split the list into two halves
 void splitList(sList *source, sList **front, sList **back)
 {
 	if (!source || !source->next)
@@ -110,18 +109,20 @@ tList* insertionSort(tList* head, int option) {
 
 // Insert a node into the sorted linked list
 tList* insertSorted(tList* head, tList* newNode, int option) {
-    if (!head || compare(head, newNode, option)) {
+    if (!head || compare(head, newNode, option)) // Insert at the beginning
+	{
         newNode->next = head;
         return newNode;
     }
 
     tList* current = head;
-    while (current->next && !compare(current->next, newNode, option)) {
+    while (current->next && !compare(current->next, newNode, option))  // Traverse the list
+	{
         current = current->next;
     }
 
-    newNode->next = current->next;
-    current->next = newNode;
+    newNode->next = current->next; // Insert the node
+    current->next = newNode; // Link the previous node to the new node
     return head;
 }
 
@@ -138,15 +139,15 @@ bool compare(tList* a, tList* b, int option) {
 // merge the whole sort
 sList *mergeSort(sList *head, int option)
 {
-	if (!head || !head->next)
+	if (!head || !head->next) // Base case: 0 or 1 node
 		return head;
 
 	sList *left;
 	sList *right;
-	splitList(head, &left, &right);
+	splitList(head, &left, &right); // Split the list into two halves
 
-	left = mergeSort(left, option);
-	right = mergeSort(right, option);
+	left = mergeSort(left, option); // Recursively sort the left half
+	right = mergeSort(right, option); // Recursively sort the right half
 
 	return mergeSorted(left, right, option);
 }

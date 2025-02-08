@@ -7,9 +7,11 @@ int totalTeachers = 0;
 
 void create10Student(sList *&head)
 {
+	string firstNames[10] = {"Ethan", "Alex", "Cheah", "Law", "Charlie", "Diana", "Dickson", "Fiona", "George", "Hannah"};
+    string lastNames[10] = {"Law", "Tew", "Xiao You", "Yong Soon", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor"};
 	for (int i = 0; i < 10; i++)
 	{
-		addStudentToEnd(head, new sList(studID, "test", "student", 'M', "0123-3455", "test@gmail.com", "12-12-2000", "Diploma in IT"));
+		addStudentToEnd(head, new sList(studID, firstNames[i],  lastNames[i], 'M', "0123-3455", "test@gmail.com", "12-12-2000", "Diploma in IT"));
 		studID++;
 		totalStudents++;
 	}
@@ -17,20 +19,22 @@ void create10Student(sList *&head)
 
 void create10Teacher(tList *&head)
 {
+	string firstNames[10] = {"Ethan", "Alex", "Cheah", "Law", "Charlie", "Diana", "Dickson", "Fiona", "George", "Hannah"};
+    string lastNames[10] = {"Law", "Tew", "Xiao You", "Yong Soon", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor"};
+
 	for (int i = 0; i < 10; i++)
 	{
-		addTeacherToEnd(head, new tList(teacherID, "test", "teacher", 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
+		addTeacherToEnd(head, new tList(teacherID, firstNames[i], lastNames[i], 'M', "0123-3455", "test@gmail.com", "12-12-2000"));
 		teacherID++;
 		totalTeachers++;
 	}
 }
 
-void studentMenu(sList *&student)
+void studentMenu(sList *&student, Admin &admin)
 {
 	int exit = 1;
 	while (exit)
 	{
-
 		int choice;
 
 		cout << YELLOW;
@@ -40,9 +44,10 @@ void studentMenu(sList *&student)
 		cout << "2. Remove Student" << endl;
 		cout << "3. Display Student" << endl;
 		cout << "4. Search/Edit Student" << endl;
-		cout << "5. Exit" << endl;
+		cout << "5. Submit Ticket" << endl;
+		cout << "6. Exit" << endl;
 		cout << YELLOW;
-		cout << "Enter the number you want to go" << endl;
+		cout << "Enter your option (1-6)" << endl;
 		cout << RESET;
 		cin >> choice;
 		switch (choice)
@@ -60,22 +65,23 @@ void studentMenu(sList *&student)
 			searchStudent(student);
 			break;
 		case 5:
-			cout << "Exiting student menu." << endl;
+			submitTicket(admin, "Student");
+			break;
+		case 6:
 			exit = 0;
 			break;
 		default:
-			cout << "Invalid choice. Please try again." << endl;
+			cout << RED <<"Invalid choice. Please try again." << WHITE << endl;
 			break;
 		}
 	}
 }
 
-void teacherMenu(tList *&teacher)
+void teacherMenu(tList *&teacher, Admin &admin)
 {
 	int exit = 1;
 	while (exit)
 	{
-
 		int choice;
 
 		cout << YELLOW;
@@ -85,9 +91,10 @@ void teacherMenu(tList *&teacher)
 		cout << "2. Remove Teacher" << endl;
 		cout << "3. Display Teacher" << endl;
 		cout << "4. Search/Exit Teacher" << endl;
-		cout << "5. Exit" << endl;
+		cout << "5. Submit Ticket" << endl;
+		cout << "6. Exit" << endl;
 		cout << YELLOW;
-		cout << "Enter the number you want to go" << endl;
+		cout << "Enter your option (1-6)" << endl;
 		cout << RESET;
 		cin >> choice;
 		switch (choice)
@@ -105,17 +112,52 @@ void teacherMenu(tList *&teacher)
 			searchTeacher(teacher);
 			break;
 		case 5:
-			cout << "Exiting teacher menu." << endl;
+			submitTicket(admin, "Teacher");
+		case 6:
 			exit = 0;
 			break;
+
 		default:
-			cout << "Invalid choice. Please try again." << endl;
+			cout << RED <<"Invalid choice. Please try again." << WHITE << endl;
 			break;
 		}
 	}
 }
 
-void menu(sList *&student, tList *&teacher)
+void adminMenu(Admin &admin) {
+    int exit = 1;
+    while (exit) {
+        int choice;
+        cout << YELLOW;
+        cout << "\n========== Admin Menu ==========\n";
+        cout << GREEN;
+        cout << "1. View Problem\n";
+        cout << "2. Solve Problem\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cout << YELLOW;
+        cin >> choice;
+        cout << RESET;
+
+        switch (choice) {
+            case 1: 
+                admin.viewProblem(); 
+                break;
+            case 2: 
+                admin.solveProblem(); 
+                break;
+            case 3: 
+                exit = 0; 
+                break;
+            default: 
+                cout << RED << "Invalid choice. Please try again.\n" << WHITE; 
+                break;
+        }
+    }
+}
+
+
+void menu(sList *&student, tList *&teacher, Admin &admin)
 {
 	int choice;
 	while (1)
@@ -138,13 +180,13 @@ void menu(sList *&student, tList *&teacher)
 		switch (choice)
 		{
 		case 1:
-			studentMenu(student);
+			studentMenu(student,admin);
 			break;
 		case 2:
-			teacherMenu(teacher);
+			teacherMenu(teacher,admin);
 			break;
 		case 3:
-			cout << "Admin Menu" << endl;
+			adminMenu(admin);
 			break;
 		}
 		if (choice == 4)
@@ -157,8 +199,10 @@ int main()
 	sList *student = NULL;
 	tList *teacher = NULL;
 
+	Admin admin;
+
 	create10Student(student);
 	create10Teacher(teacher);
 
-	menu(student, teacher);
+	menu(student, teacher, admin);
 }
