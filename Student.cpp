@@ -132,7 +132,8 @@ void searchStudent(sList *head)
 	if (head == NULL)
 	{
 		int input;
-		cout << RED "No students in the list. Press any key to return\n" << WHITE;
+		cout << RED "No students in the list. Press any key to return\n"
+			 << WHITE;
 		cin >> input;
 		return;
 	}
@@ -278,26 +279,30 @@ void displayStudents(sList *head)
 	}
 
 	int choice;
-	cout << GREEN;
-	std::cout << "\nSelect sorting option:\n";
-	cout << YELLOW;
-	std::cout << "1. ID Ascending\n";
-	std::cout << "2. ID Descending\n";
-	std::cout << "3. Name Ascending\n";
-	std::cout << "4. Name Descending\n";
-	std::cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
-	std::cin >> choice;
+	while (1)
+	{
+		cout << YELLOW;
+		std::cout << "\nSelect sorting option:\n";
+		cout << GREEN;
+		std::cout << "1. ID Ascending\n";
+		std::cout << "2. ID Descending\n";
+		std::cout << "3. Name Ascending\n";
+		std::cout << "4. Name Descending\n";
+		cout << YELLOW;
+		std::cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
+		std::cin >> choice;
 
-	if (choice == 0)
-		return;
-	else if (choice < 1 || choice > 4)
-	{
-		std::cout << RED << "Invalid choice! Displaying unsorted list.\n"
-				  << WHITE;
-	}
-	else
-	{
-		head = mergeSort(head, choice); // Perform Merge Sort
+		if (choice == 0)
+			return;
+		else if (choice < 1 || choice > 4)
+		{
+			std::cout << RED << "Invalid choice! Try again.\n"<< WHITE;
+		}
+		else
+		{
+			head = mergeSort(head, choice); // Perform Merge Sort
+			break;
+		}
 	}
 
 	sList *current = head;
@@ -306,13 +311,13 @@ void displayStudents(sList *head)
 	const int nameWidth = 20;
 
 	// Print the output of the display student list
-	std::cout << GREEN;
+	std::cout << YELLOW;
 	std::cout << "-----------------------------------\n";
 	std::cout << "| " << std::left << std::setw(idWidth) << "ID"
 			  << " | " << std::setw(nameWidth) << "Name"
 			  << " |\n";
-	std::cout << YELLOW;
 	std::cout << "-----------------------------------\n";
+	std::cout << GREEN;
 
 	while (current)
 	{

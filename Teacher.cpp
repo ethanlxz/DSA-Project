@@ -116,9 +116,11 @@ void deleteTeacher(tList *&head)
 // Function to search for a teacher by ID using linear search
 void searchTeacher(tList *head)
 {
-	if (head == nullptr)
+	if (head == NULL)
 	{
-		cout << "No teachers in the list.\n";
+		int input;
+		cout << RED "No teachers in the list. Press any key to return :" << WHITE;
+		cin >> input;
 		return;
 	}
 
@@ -234,4 +236,73 @@ void searchTeacher(tList *head)
 		cin >> back;
 		return;
 	}
+}
+
+// Function to display all teachers in the list
+void displayTeacher(tList *&head)
+{
+	if (head == NULL)
+	{
+		int input;
+		cout << RED "No teachers in the list. Press any key to return :" << WHITE;
+		cin >> input;
+		return;
+	}
+
+	while (1)
+	{
+	int choice;
+	cout << YELLOW;
+	std::cout << "\nSelect sorting option:\n";
+	cout << GREEN;
+	std::cout << "1. ID Ascending\n";
+	std::cout << "2. ID Descending\n";
+	std::cout << "3. Name Ascending\n";
+	std::cout << "4. Name Descending\n";
+	cout << YELLOW;
+	std::cout << "Enter choice (1-4) or 0 to go back: " << WHITE;
+	std::cin >> choice;
+
+	if (choice == 0)
+		return;
+	else if (choice < 1 || choice > 4)
+	{
+		std::cout << RED <<"Invalid choice! Try again.\n" << WHITE;
+	}
+	else
+	{
+		head = insertionSort(head, choice); // Perform insertion sort
+		break;
+	}
+	}
+
+	// Display sorted teacher list
+	tList *current = head;
+	int index = 1;
+	const int idWidth = 6;
+	const int nameWidth = 20;
+
+	// Print the display Teacher List
+	cout << YELLOW;
+	std::cout << "-----------------------------------\n";
+	std::cout << "| " << std::left << std::setw(idWidth) << "ID"
+			  << " | " << std::setw(nameWidth) << "Name"
+			  << " |\n";
+	std::cout << "-----------------------------------\n";
+	std::cout << GREEN;
+
+	while (current)
+	{
+		std::cout << "| " << std::left << std::setw(idWidth) << current->teacher->getID()
+				  << " | " << std::setw(nameWidth) << current->teacher->getName()
+				  << " |\n";
+		current = current->next;
+	}
+
+	std::cout << "-----------------------------------\n";
+
+	int input;
+	std::cout << YELLOW << "\nPress any key to return : " << WHITE;
+	cin >> input;
+	return;
 }
