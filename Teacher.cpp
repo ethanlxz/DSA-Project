@@ -31,6 +31,7 @@ Teacher::~Teacher()
 // Function to add a new teacher
 void addTeacher(tList *&head)
 {
+	// Get the teacher details from the user
 	string firstName, lastName, contactNum, email, dob;
 	char gender;
 
@@ -48,6 +49,7 @@ void addTeacher(tList *&head)
 	cin.ignore(); // To ignore the newline character left in the buffer
 	getline(cin, dob);
 
+	// Add the teacher to the end of list
 	addTeacherToEnd(head, new tList(teacherID, firstName, lastName, gender, contactNum, email, dob));
 
 	cout << GREEN << "Teacher added successfully!\n"<< WHITE;
@@ -79,13 +81,14 @@ void addTeacherToEnd(tList *&head, tList *newNode)
 // Function to delete a teacher by name
 void deleteTeacher(tList *&head)
 {
+	string input;
 	string name;
-	cout << "Enter the full name/ ID of the teacher to delete: ";
+	cout << YELLOW << "Enter the full name/ ID of the teacher to delete: " << WHITE;
 	cin.ignore();
-	getline(cin, name);
+	getline(cin, name); // Get the teacher's name
 
-	tList *current = head;
-	tList *previous = nullptr;
+	tList *current = head; // Pointer to the current node
+	tList *previous = nullptr; // Pointer to keep track of the previous node
 
 	while (current != nullptr)
 	{
@@ -93,22 +96,21 @@ void deleteTeacher(tList *&head)
 		if (current->teacher->getName() == name || (to_string(current->teacher->getID()) == name))
 		{
 			if (previous == nullptr)
-			{
-				head = current->next;
-			}
+				head = current->next; // Deleting the head
 			else
-			{
-				// Bypass the current node
-				previous->next = current->next;
-			}
-			delete current;
-			cout << "Teacher deleted successfully!\n";
-			return; // Exit the function after deletion
+				previous->next = current->next; // Bypass the current node
+
+			delete current; // Free memory
+			cout << "Teacher deleted successfully! Press any key to return\n";
+			cin >> input;
+			return;
 		}
-		previous = current; // Move to the next node
-		current = current->next;
+		previous = current;
+		current = current->next; /// Move to the next node
 	}
-	cout << "Teacher not found!\n";
+	cout << RED << "Teacher not found! Press any key to return\n" << RESET;
+	cin >> input;
+	return;
 }
 
 // Function to search for a teacher by ID using linear search

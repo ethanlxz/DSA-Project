@@ -42,6 +42,7 @@ Student::~Student()
 
 void addStudent(sList *&head)
 {
+	// Get the student details from the user
 	std::string id, firstName, lastName, contactNum, email, dob, major;
 	char gender;
 
@@ -66,6 +67,7 @@ void addStudent(sList *&head)
 	cout << "Enter your major: "; // To ignore the newline character left in the buffer
 	getline(cin, major);
 
+	// Add the student to the end of list
 	addStudentToEnd(head, new sList(studID, firstName, lastName, gender, contactNum, email, dob, major));
 
 	std::cout << "Student added successfully!\n";
@@ -95,36 +97,35 @@ void addStudentToEnd(sList *&head, sList *newNode)
 // Function to delete a student by name
 void deleteStudent(sList *&head)
 {
-	int input;
+	string input;
 	string name;
-	cout << YELLOW << "Enter the full name / ID of the student to delete: " << WHITE; // Ask for the name of the student to delete
+	cout << YELLOW << "Enter the full name / ID of the student to delete: " << WHITE;
 	cin.ignore();
-	getline(cin, name);
+	getline(cin, name); // Get the input from the user
 
-	sList *current = head;
-	sList *previous = nullptr;
+	sList *current = head; // Pointer to the current node
+	sList *previous = nullptr; // Pointer to the previous student node
 
 	while (current != nullptr)
 	{
 		if (current->student->getName() == name || (to_string(current->student->getID()) == name))
 		{
 			if (previous == nullptr)
-			{
 				head = current->next; // Deleting the head
-			}
 			else
-			{
 				previous->next = current->next; // Bypass the current node
-			}
+
 			delete current; // Free memory
 			cout << RED << "Student deleted successfully! Press any key to return\n" << WHITE;
 			cin >> input;
 			return;
 		}
 		previous = current;
-		current = current->next;
+		current = current->next; // Move to the next student
 	}
-	cout << "Student not found!\n";
+	cout << RED << "Student not found! Press any key to return\n" << WHITE;
+	cin >> input;
+	return;
 }
 
 // Function to search for a student by ID using linear search
