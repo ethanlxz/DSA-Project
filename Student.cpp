@@ -59,7 +59,6 @@ void addStudent(sList *&head)
 	getline(cin, contactNum);
 	cout << "Enter Email: ";
 	getline(cin, email);
-	cin.ignore();
 	cout << "Enter Date Of Birth (DD-MM-YYYY): ";
 	getline(cin, dob);
 	cout << "Enter your major: "; // To ignore the newline character left in the buffer
