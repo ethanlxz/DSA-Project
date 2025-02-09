@@ -114,7 +114,7 @@ void deleteStudent(sList *&head);
 
 void searchStudent(sList *head); // uses Linear Search
 
-void displayStudents(sList *head);// uses Merge Sort
+void displayStudents(sList *&head);// uses Merge Sort
 sList* mergeSort(sList* head, int option);
 
 // Linked list for teacher

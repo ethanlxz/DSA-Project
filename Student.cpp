@@ -267,7 +267,7 @@ void searchStudent(sList *head)
 }
 
 // Function to display all students in the list
-void displayStudents(sList *head)
+void displayStudents(sList *&head)
 {
 	if (head == NULL) // If the list is empty
 	{
@@ -328,7 +328,7 @@ void displayStudents(sList *head)
 
 	cout << "-----------------------------------\n";
 
-	int input;
+	string input;
 	cout << "\nPress any key to return : " << WHITE;
 	cin >> input;
 	return;

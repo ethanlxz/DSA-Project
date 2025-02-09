@@ -304,7 +304,7 @@ void displayTeacher(tList *&head)
 
 	cout << "-----------------------------------\n";
 
-	int input;
+	string input;
 	cout << YELLOW << "\nPress any key to return : " << WHITE;
 	cin >> input;
 	return;
